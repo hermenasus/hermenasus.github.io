@@ -16,6 +16,30 @@ const types = {
 
 const server = createServer(async (request, response) => {
   const url = new URL(request.url ?? "/", "http://localhost");
+
+  if (url.pathname === "/api/comments") {
+    try {
+      const apiUrl = new URL(
+        "https://www.zaih.com/falcon/meet_api/v1/mentors/2bllbjjbq3k/comments"
+      );
+      apiUrl.search = url.search;
+      const apiResponse = await fetch(apiUrl, { headers: { accept: "application/json" } });
+      const body = await apiResponse.text();
+      response.writeHead(apiResponse.ok ? 200 : apiResponse.status, {
+        "Cache-Control": "no-store",
+        "Content-Type": apiResponse.headers.get("content-type") ?? types[".json"]
+      });
+      response.end(body);
+    } catch {
+      response.writeHead(502, {
+        "Cache-Control": "no-store",
+        "Content-Type": types[".json"]
+      });
+      response.end(JSON.stringify({ error: "Unable to fetch comments" }));
+    }
+    return;
+  }
+
   const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
   const safePath = normalize(pathname).replace(/^(\.\.[/\\])+/, "");
   const filePath = join(root, safePath);
@@ -32,6 +56,10 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.listen(4173, "127.0.0.1", () => {
-  console.log("Preview running at http://127.0.0.1:4173");
+const port = Number(process.env.PORT || 4173);
+const host = process.env.HOST || "0.0.0.0";
+
+server.listen(port, host, () => {
+  const visibleHost = host === "0.0.0.0" ? "127.0.0.1" : host;
+  console.log(`Preview running at http://${visibleHost}:${port}`);
 });

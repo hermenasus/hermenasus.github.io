@@ -21,6 +21,11 @@
         <a href="#media">媒體</a>
         <a href="#reviews">評價</a>
       </nav>
+      <div class="language-switcher" role="group" aria-label="語言切換">
+        <button class="language-option active" type="button" data-locale="zh-Hant">繁</button>
+        <button class="language-option" type="button" data-locale="zh-Hans">简</button>
+        <button class="language-option" type="button" data-locale="en">EN</button>
+      </div>
     </header>
 
     <main id="top">
@@ -253,11 +258,11 @@
             <p class="eyebrow">Reviews</p>
             <h2>用戶評價</h2>
             <p>
-              已接入原頁公開評論資料，共 172 則。每則評論保留原始主題、時間、用戶名稱與文字內容，方便快速理解 Ethan 的諮詢品質與服務風格。
+            每次開啟頁面都會同步原頁公開評論資料，並更新評論總數。每則評論保留原始主題、時間、用戶名稱與文字內容，方便快速理解 Ethan 的諮詢品質與服務風格。
             </p>
           </div>
           <div class="review-state">
-            <strong id="review-total">172</strong>
+            <strong id="review-total">--</strong>
             <span>公開文字評價</span>
             <small>來自在行評論接口</small>
           </div>
@@ -265,14 +270,14 @@
         <div class="reviews-browser" aria-label="用戶評論瀏覽器">
           <div class="reviews-toolbar">
             <div>
-              <span id="review-count-label">顯示全部 172 則</span>
+              <span id="review-count-label">正在同步評論</span>
               <strong id="review-topic-label">全部主題</strong>
             </div>
             <label class="review-filter-label" for="review-filter">主題篩選</label>
             <select id="review-filter" class="review-filter"></select>
           </div>
           <div class="reviews-grid" id="reviews-grid"></div>
-          <button class="load-more-reviews" id="load-more-reviews" type="button">載入更多評論</button>
+          <nav class="reviews-pagination" id="reviews-pagination" aria-label="評論頁數"></nav>
         </div>
       </section>
     </main>

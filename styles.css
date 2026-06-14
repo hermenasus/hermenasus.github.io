@@ -90,6 +90,36 @@ a {
   color: var(--ink);
 }
 
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(23, 32, 28, 0.14);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.language-option {
+  min-width: 42px;
+  min-height: 36px;
+  border: 0;
+  border-right: 1px solid rgba(23, 32, 28, 0.1);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.language-option:last-child {
+  border-right: 0;
+}
+
+.language-option.active,
+.language-option:hover {
+  background: var(--ink);
+  color: #f5f1e7;
+}
+
 .hero {
   position: relative;
   display: grid;
@@ -805,20 +835,52 @@ h3 {
   font-size: 14px;
 }
 
-.load-more-reviews {
-  display: block;
-  min-height: 48px;
-  margin: 26px auto 0;
-  padding: 0 24px;
-  border: 1px solid rgba(23, 61, 58, 0.38);
-  background: var(--teal);
-  color: #f5f1e7;
+.reviews-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+  text-align: center;
+}
+
+.reviews-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.reviews-pagination button {
+  min-width: 42px;
+  min-height: 42px;
+  padding: 0 13px;
+  border: 1px solid rgba(23, 61, 58, 0.24);
+  background: #ffffff;
+  color: var(--teal);
   cursor: pointer;
   font-weight: 800;
 }
 
-.load-more-reviews[hidden] {
-  display: none;
+.reviews-pagination button.active,
+.reviews-pagination button:hover:not(:disabled) {
+  background: var(--teal);
+  color: #f5f1e7;
+}
+
+.reviews-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.reviews-pagination span {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 800;
 }
 
 .site-footer {
@@ -862,6 +924,10 @@ h3 {
     flex-direction: column;
   }
 
+  .language-switcher {
+    align-self: flex-start;
+  }
+
   .hero,
   .profile-grid,
   .contact-panel,
@@ -903,6 +969,15 @@ h3 {
   .nav-links {
     width: 100%;
     justify-content: space-between;
+    overflow-x: auto;
+  }
+
+  .language-switcher {
+    width: 100%;
+  }
+
+  .language-option {
+    flex: 1;
   }
 
   .hero,
